@@ -37,12 +37,4 @@ rm -rf $BUILD_DIR
 rm -rf build/
 rm *.spec
 
-# Read Unsplash API token
-echo "Enter Unsplash API Access Token: "
-read token
-
-# Set up Unsplash API token
-unset UNSPLASH_API_TOKEN
-echo "export UNSPLASH_API_TOKEN=\"$token\"" >> ~/.bashrc
-
 echo "Installation done!"

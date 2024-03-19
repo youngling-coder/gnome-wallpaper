@@ -38,7 +38,18 @@ $ ./setup.sh
 ```
 
 ### Unsplash API setup
-Paste your Unsplash API token when it will be prompted while script execution.
+Paste your Unsplash API token when in config file
+
+```json
+{
+    "app": {
+        "wallpaper_filename": "unsplash_wallpaper.jpg",
+        "download_directory": "~/.local/share/backgrounds/",
+        "unsplash_access_token": "YOUR_TOKEN_HERE"
+    },
+    ...
+}
+```
 
 ### GUI Interface
 
@@ -56,11 +67,7 @@ You can also see file called ```config.json``` in source code or in installed ap
 
 ```json
 {
-    "app": {
-        "wallpaper_filename": "unsplash_wallpaper.jpg",
-        "download_directory": "~/.local/share/backgrounds/"
-    },
-
+    ...
     // modify these parameters
     "image": {
         "query": "apples",

@@ -1,6 +1,5 @@
-import sys
 import requests
-from config import CONFIG, load_config, write_config
+from config import load_config, write_config
 import os
 
 # This application is powered by the Unsplash API
@@ -9,21 +8,19 @@ import os
 # Unsplash License: https://unsplash.com/license
 # More info about Unsplash API: https://unsplash.com/documentation
 
-# Initializing Unsplash API token and url
-API_TOKEN = os.getenv("UNSPLASH_API_TOKEN")
-API_URL = "https://api.unsplash.com/photos/random"
-
-# Reading command line arguments
-args = sys.argv
-
 # Setting up basic config store parameters
 config_filename = os.path.expanduser("~/.config/gnome-wallpaper/config.json")
 
 # Check if config file exists and create one if not
 if not os.path.exists(config_filename) or os.path.isdir(config_filename):
-    write_config(config_filename)
+    CONFIG = write_config(config_filename)
 else:
-    load_config(config_filename)
+    CONFIG = load_config(config_filename)
+
+# Initializing Unsplash API token and URL
+
+API_TOKEN = CONFIG["app"]["unsplash_access_token"]
+API_URL = "https://api.unsplash.com/photos/random"
 
 # Initializing downloading parameters
 WALLPAPER_DIRECTORY = os.path.expanduser(CONFIG["app"]["download_directory"])
@@ -88,18 +85,3 @@ def get_image_as_bytes(url: str) -> bytes | None:
     # Return content as bytes
     if response.status_code == 200:
         return response.content
-
-
-if __name__ == "__main__":
-
-    # Get image url to work with
-    image_url = get_image_url()
-
-    # Obtain image as bytes collection for further processing
-    img_content = get_image_as_bytes(url=image_url)
-
-    # Save image and return downloaded image path
-    save_image(img_content)
-
-    # Set new wallpapers
-    set_wallpaper()

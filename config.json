@@ -1,7 +1,8 @@
 {
     "app": {
         "wallpaper_filename": "unsplash_wallpaper.jpg",
-        "download_directory": "~/.local/share/backgrounds/"
+        "download_directory": "~/.local/share/backgrounds/",
+        "unsplash_access_token": ""
     },
     "image": {
         "orientation": "landscape",
