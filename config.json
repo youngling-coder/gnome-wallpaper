@@ -1,0 +1,10 @@
+{
+    "app": {
+        "wallpaper_filename": "unsplash_wallpaper.jpg",
+        "download_directory": "~/.local/share/backgrounds/"
+    },
+    "image": {
+        "orientation": "landscape",
+        "count": 1
+    }
+}

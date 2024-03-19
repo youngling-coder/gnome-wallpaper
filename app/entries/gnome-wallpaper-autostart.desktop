@@ -1,0 +1,4 @@
+[Desktop Entry]
+Comment=Fresh wallpapers every time
+Exec=/bin/bash -c "$HOME/.gnome-wallpaper/gnome-wallpaper"
+Type=Application
