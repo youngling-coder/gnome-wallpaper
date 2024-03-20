@@ -1,3 +1,8 @@
+<p align="center">
+  <img width=192 src="https://github.com/youngling-coder/gnome-wallpaper/assets/142408709/4ae0ed52-efdb-482f-84e3-58fad2962b8d" alt="Sublime's custom image"/>
+</p>
+
+
 # 🖥️ GNOME Wallpaper
 
 Tool that automatically sets a new wallpaper image from the Unsplash every new session. Powered by the Unsplash API.
