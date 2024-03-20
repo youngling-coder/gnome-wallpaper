@@ -19,7 +19,8 @@ pyinstaller --onefile --noconsole app/main.py --name $APP_NAME
 chmod +x dist/$APP_NAME
 
 # Create autostart directory if not exists
-mkdir -p $AUTOSTART_DIR $CONFIG_DIR $ICON_DIR
+mkdir -p $AUTOSTART_DIR $CONFIG_DIR
+sudo mkdir -p $ICON_DIR
 
 # Install necessary files
 sudo cp dist/$APP_NAME $EXEC_DIR
