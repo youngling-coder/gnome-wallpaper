@@ -18,7 +18,6 @@ else:
     CONFIG = load_config(config_filename)
 
 # Initializing Unsplash API token and URL
-
 API_TOKEN = CONFIG["app"]["unsplash_access_token"]
 API_URL = "https://api.unsplash.com/photos/random"
 
