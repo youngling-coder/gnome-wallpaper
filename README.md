@@ -1,7 +1,6 @@
 <p align="center">
-  <img width=192 src="https://github.com/youngling-coder/gnome-wallpaper/assets/142408709/4ae0ed52-efdb-482f-84e3-58fad2962b8d" alt="Sublime's custom image"/>
+  <img width=192 src="https://github.com/youngling-coder/gnome-wallpaper/assets/142408709/f9d44edc-e399-4b80-b76f-3eec9ead3a93" alt="Logo"/>
 </p>
-
 
 # 🖥️ GNOME Wallpaper
 
