@@ -18,6 +18,9 @@ class Ui_MainWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icon/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
+        MainWindow.setWindowOpacity(1.0)
+        MainWindow.setIconSize(QtCore.QSize(128, 128))
+        MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -66,7 +69,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "GNOME Wallpaper"))
-        self.imageArea.setText(_translate("MainWindow", "Wallpaper image will be displayed here!"))
+        self.imageArea.setText(_translate("MainWindow", "Wallpaper image will be shown here!"))
         self.creditsLabel.setText(_translate("MainWindow", "Captured by"))
         self.getWallpaperButton.setText(_translate("MainWindow", "Get Wallpaper!"))
         self.setWallpaperButton.setText(_translate("MainWindow", "Set Wallpaper!"))

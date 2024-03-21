@@ -8,6 +8,7 @@ EXEC_DIR=/bin/
 CONFIG_DIR=~/.config/$APP_NAME
 ICON_DIR=/usr/share/icons/$APP_NAME
 AUTOSTART_DIR=~/.config/autostart
+APP_SHORTCUT_DIR=~/.local/share/applications/
 
 # Installing python3 requirements
 pip3 install -r requirements.txt
@@ -27,6 +28,7 @@ sudo cp dist/$APP_NAME $EXEC_DIR
 cp config.json $CONFIG_DIR
 sudo cp app/icon.png $ICON_DIR
 cp app/entries/$APP_NAME-autostart.desktop $AUTOSTART_DIR
+cp app/entries/$APP_NAME-gui.desktop $APP_SHORTCUT_DIR
 
 # Remove building files after install
 rm -rf $BUILD_DIR

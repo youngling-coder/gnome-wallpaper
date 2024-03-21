@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=GNOME Wallpaper
+Comment=Fresh wallpapers every time
+Type=Application
+Terminal=false
+Exec=gnome-wallpaper --gui
+Icon=/usr/share/icons/gnome-wallpaper/icon.png
