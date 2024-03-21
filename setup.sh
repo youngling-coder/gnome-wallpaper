@@ -26,7 +26,7 @@ sudo mkdir -p $ICON_DIR
 # Install necessary files
 sudo cp dist/$APP_NAME $EXEC_DIR
 cp config.json $CONFIG_DIR
-sudo cp app/icon.png $ICON_DIR
+sudo cp app/icons/icon_128.png $ICON_DIR/icon.png
 cp app/entries/$APP_NAME-autostart.desktop $AUTOSTART_DIR
 cp app/entries/$APP_NAME-gui.desktop $APP_SHORTCUT_DIR
 
