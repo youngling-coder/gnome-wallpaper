@@ -24,7 +24,7 @@ API_URL = "https://api.unsplash.com/photos/random"
 # Initializing downloading parameters
 WALLPAPER_DIRECTORY = os.path.expanduser(CONFIG["app"]["download_directory"])
 BASE_IMAGE_NAME = CONFIG["app"]["wallpaper_filename"]
-DONWLOAD_PATH = os.path.join(WALLPAPER_DIRECTORY, BASE_IMAGE_NAME)
+DOWNLOAD_PATH = os.path.join(WALLPAPER_DIRECTORY, BASE_IMAGE_NAME)
 
 
 def set_wallpaper() -> None:
@@ -37,28 +37,27 @@ def set_wallpaper() -> None:
     # to work properly or work at all.
 
     # Commands to set wallpaper for dark and light themes
-    commands = [f"gsettings set org.gnome.desktop.background picture-uri \"file://{DONWLOAD_PATH}\"",
-                f"gsettings set org.gnome.desktop.background picture-uri-dark \"file://{DONWLOAD_PATH}\""]
+    commands = [f"gsettings set org.gnome.desktop.background picture-uri \"file://{DOWNLOAD_PATH}\"",
+                f"gsettings set org.gnome.desktop.background picture-uri-dark \"file://{DOWNLOAD_PATH}\""]
 
     # Running commands
     for command in commands:
         os.system(command=command)
 
 
-def save_image(content: bytes) -> str:
+def save_image(content: bytes) -> None:
     """Saves image locally. Returns downloaded file location"""
 
     # Set up download directory if not exists
     if not os.path.exists(WALLPAPER_DIRECTORY):
         os.mkdir(WALLPAPER_DIRECTORY)
 
-
     # Writing data to the image
-    with open(DONWLOAD_PATH, "wb") as write_image:
+    with open(DOWNLOAD_PATH, "wb") as write_image:
         write_image.write(content)
 
 
-def get_image_url() -> str:
+def get_image_url() -> dict:
     """Get image url."""
 
     # Setting up parameters & headers

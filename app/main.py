@@ -23,7 +23,6 @@ class GNOME_Wallpaper(QMainWindow):
         self.ui.getWallpaperButton.clicked.connect(get_wallpaper)
         self.ui.setWallpaperButton.clicked.connect(self.setWallpaperButtonClicked)
 
-
     def getWallpaperButtonClicked(self, gui_mode: bool = True):
 
         # Fetch new random image
@@ -38,12 +37,12 @@ class GNOME_Wallpaper(QMainWindow):
             pixmap = QPixmap().fromImage(image)
 
             # Generate credits for a photo
-            credits_link = f"Captured by <a href=\"{self.current_image["user"]["links"]["html"]}\">{self.current_image["user"]["name"]}</a>"
+            credits_link = f"Captured by <a href=\"{self.current_image["user"]["links"]["html"]}\">\
+                            {self.current_image["user"]["name"]}</a>"
 
             # Show photo with credits
             self.ui.creditsLabel.setText(credits_link)
             self.ui.imageArea.setPixmap(pixmap)
-
 
     def setWallpaperButtonClicked(self):
 
@@ -53,7 +52,6 @@ class GNOME_Wallpaper(QMainWindow):
         # Save image and set as wallpaper
         core.save_image(content=image_data)
         core.set_wallpaper()
-
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ BASE_CONFIG = {
     }
 }
 
+
 def load_config(filename: str):
     """Load config from file as a dict object."""
 
