@@ -1,5 +1,5 @@
 <p align="center">
-  <img width=192 src="https://github.com/youngling-coder/gnome-wallpaper/assets/142408709/f9d44edc-e399-4b80-b76f-3eec9ead3a93" alt="Logo"/>
+  <img width=192 src="https://github.com/youngling-coder/gnome-wallpaper/assets/142408709/6963a240-f955-446d-804e-7d5e8f206c17" alt="Logo"/>
 </p>
 
 # 🖥️ GNOME Wallpaper
