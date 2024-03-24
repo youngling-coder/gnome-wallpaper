@@ -1,4 +1,5 @@
 import requests
+from http.client import responses
 from config import load_config, write_config
 import os
 
@@ -18,6 +19,7 @@ else:
     CONFIG = load_config(config_filename)
 
 # Initializing Unsplash API token and URL
+
 API_TOKEN = CONFIG["app"]["unsplash_access_token"]
 API_URL = "https://api.unsplash.com/photos/random"
 
@@ -58,7 +60,7 @@ def save_image(content: bytes) -> None:
 
 
 def get_image_url() -> dict:
-    """Get image url."""
+    """Fetches URL of the image."""
 
     # Setting up parameters & headers
     headers = {
@@ -69,6 +71,9 @@ def get_image_url() -> dict:
 
     # Generating response from API
     response = requests.get(API_URL, headers=headers, params=params)
+
+    if response.status_code != 200:
+        raise requests.HTTPError(f"{response.status_code} - {responses[response.status_code]}")
 
     # Return image url
     return response.json()[0]
@@ -81,5 +86,7 @@ def get_image_as_bytes(url: str) -> bytes | None:
     response = requests.get(url=url)
 
     # Return content as bytes
-    if response.status_code == 200:
-        return response.content
+    if response.status_code != 200:
+        raise requests.HTTPError(f"{response.status_code} - {responses[response.status_code]}")
+
+    return response.content

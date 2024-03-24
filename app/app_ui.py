@@ -31,6 +31,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.imageArea.sizePolicy().hasHeightForWidth())
         self.imageArea.setSizePolicy(sizePolicy)
+        self.imageArea.setTextFormat(QtCore.Qt.RichText)
         self.imageArea.setScaledContents(False)
         self.imageArea.setAlignment(QtCore.Qt.AlignCenter)
         self.imageArea.setObjectName("imageArea")
@@ -69,7 +70,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "GNOME Wallpaper"))
-        self.imageArea.setText(_translate("MainWindow", "Wallpaper image will be shown here!"))
+        self.imageArea.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/icon/icons/icon_128.png\"/></p><p>Wallpaper image will be shown here!</p></body></html>"))
         self.creditsLabel.setText(_translate("MainWindow", "Captured by"))
         self.getWallpaperButton.setText(_translate("MainWindow", "Get Wallpaper!"))
         self.setWallpaperButton.setText(_translate("MainWindow", "Set Wallpaper!"))

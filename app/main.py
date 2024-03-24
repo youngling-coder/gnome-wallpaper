@@ -2,35 +2,64 @@
 
 import sys
 from core import core
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from PyQt5.QtGui import QPixmap, QImage
 from app_ui import Ui_MainWindow
 
 
 class GNOME_Wallpaper(QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self, gui_mode: bool = False) -> None:
         super(GNOME_Wallpaper, self).__init__()
 
-        # Setup UI
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        # Flag is responsible for UI rendering
+        self.gui_mode = gui_mode
+
+        # Setup UI if gui mode enabled
+        if self.gui_mode:
+            self.ui = Ui_MainWindow()
+            self.ui.setupUi(self)
+
+            # Connect slots to methods
+            self.ui.getWallpaperButton.clicked.connect(self.getWallpaperButtonClicked)
+            self.ui.setWallpaperButton.clicked.connect(self.setWallpaperButtonClicked)
 
         # Set current image as None
         self.current_image = None
 
-        # Connect slots to methods
-        get_wallpaper = lambda: self.getWallpaperButtonClicked(gui_mode=True)
-        self.ui.getWallpaperButton.clicked.connect(get_wallpaper)
-        self.ui.setWallpaperButton.clicked.connect(self.setWallpaperButtonClicked)
-
-    def getWallpaperButtonClicked(self, gui_mode: bool = True):
-
-        # Fetch new random image
-        self.current_image = core.get_image_url()
+    def showErrorMessage(self, title: str, description: str, details: str) -> None:
+        """Beautifies and shows the error message."""
 
         if gui_mode:
+            err_msg = QMessageBox()
+            err_msg.setIcon(QMessageBox.Icon.Critical)
+            err_msg.setWindowTitle(title)
+            err_msg.setText(description)
+            err_msg.setDetailedText(details)
+            err_msg.exec()
+        else:
+            print(description + "\nDetails:\n" + details)
+
+
+    def getWallpaperButtonClicked(self):
+
+        # Fetch new random image
+        try:
+            self.current_image = core.get_image_url()
+        except Exception as ex:
+            self.showErrorMessage(title="Error!",
+                                  description="An error occurred while program execution!",
+                                  details=str(ex))
+            return -1
+
+        if self.gui_mode:
             # Select scaled image for preview
-            image_data = core.get_image_as_bytes(url=self.current_image["urls"]["regular"])
+            try:
+                image_data = core.get_image_as_bytes(url=self.current_image["urls"]["regular"])
+            except Exception as ex:
+                self.showErrorMessage(title="Error!",
+                                      description="An error occurred while program execution!",
+                                      details=str(ex))
+                return -1
 
             # Create pixmap for selected image
             image = QImage().fromData(image_data)
@@ -47,7 +76,13 @@ class GNOME_Wallpaper(QMainWindow):
     def setWallpaperButtonClicked(self):
 
         # Get full image
-        image_data = core.get_image_as_bytes(url=self.current_image["urls"]["full"])
+        try:
+            image_data = core.get_image_as_bytes(url=self.current_image["urls"]["full"])
+        except Exception as ex:
+            self.showErrorMessage(title="Error!",
+                                  description="An error occurred while program execution!",
+                                  details=str(ex))
+            return -1
 
         # Save image and set as wallpaper
         core.save_image(content=image_data)
@@ -61,15 +96,17 @@ if __name__ == "__main__":
 
     # Create application and main window instances
     app = QApplication([])
-    main_window = GNOME_Wallpaper()
+    gui_mode = "--gui" in args
+    main_window = GNOME_Wallpaper(gui_mode=gui_mode)
 
-    # Show main window if gui argument specified,
+    # Show main window if gui mode is enabled,
     # otherwise automatically download and set wallpaper
-    if "--gui" in args:
+    if gui_mode:
         main_window.show()
         sys.exit(app.exec())
     else:
-        main_window.getWallpaperButtonClicked(gui_mode=False)
-        main_window.setWallpaperButtonClicked()
+        error = main_window.getWallpaperButtonClicked()
+        if not error:
+            main_window.setWallpaperButtonClicked()
 
         app.exit()
